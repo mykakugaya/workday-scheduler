@@ -1,4 +1,5 @@
-var myDay = [
+//Retrieve myDay from localStorage or reset
+var myDay = localStorage.getItem("myDay") ? JSON.parse(localStorage.getItem("myDay")) : [
     {time: "9AM",
     event: ""},
     {time: "10AM",
@@ -16,11 +17,10 @@ var myDay = [
     {time: "4PM",
     event: ""},
     {time: "5PM",
-    event: ""}
+    event: ""}    
 ];
 
-localStorage.setItem("myDay", myDay);
-
+//Create schedule
 for(let i = 0; i < myDay.length; i++) {
     //Add row to schedule
     var nextRow = $("<div>");
@@ -36,12 +36,12 @@ for(let i = 0; i < myDay.length; i++) {
 
     //Add event
     var newEvent = $("<input>");
-    newEvent.text(myDay[i].event);
+    newEvent.val(myDay[i].event);
     newEvent.addClass("col-xs-8 col-sm-8 col-md-8 col-lg-8 input");
     newEvent.attr("data-name", myDay[i].time);
     nextRow.append(newEvent);
 
-    //Add button
+    //Add save button
     var saveBtn = $("<button>");
     saveBtn.text("Save");
     saveBtn.addClass("col-xs-2 col-sm-2 col-md-2 col-lg-2 btn btn-primary saveBtn");
@@ -57,5 +57,9 @@ $(".input").on("keyup", function() {
         event.preventDefault();
         var index = $(this).attr("data-name");
         myDay[index].event = inputText;
+        localStorage.setItem("myDay", JSON.stringify(myDay));
     });
 })
+
+//Determine past, present, future from current time
+//set classes for each
