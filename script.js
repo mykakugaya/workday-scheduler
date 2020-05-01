@@ -20,11 +20,13 @@ var myDay = localStorage.getItem("myDay") ? JSON.parse(localStorage.getItem("myD
     event: ""}    
 ];
 
+var hour = moment().format('HH');
+
 //Create schedule
 for(let i = 0; i < myDay.length; i++) {
     //Add row to schedule
     var nextRow = $("<div>");
-    nextRow.addClass("row");
+    nextRow.addClass("row time-block");
     nextRow.attr("id", myDay[i].time);
     $("#schedule").append(nextRow);
 
@@ -35,19 +37,17 @@ for(let i = 0; i < myDay.length; i++) {
     nextRow.append(newTime);
 
     //Add event
-    var newEvent = $("<input>");
+    var newEvent = $("<textarea>");
     newEvent.val(myDay[i].event);
-    newEvent.addClass("col-xs-8 col-sm-8 col-md-8 col-lg-8 input");
+    //Determine past, present, future color from current time
+    newEvent.addClass(`col-xs-8 col-sm-8 col-md-8 col-lg-8 description ${i+9 < hour ? 'past': i+9> hour ? 'future' : 'present'}`);
     newEvent.attr("data-name", myDay[i].time);
+    newEvent.attr("style", "overflow-wrap:break-word;");
     nextRow.append(newEvent);
 
     //Add save button
-    var saveBtn = $("<button>");
-    saveBtn.text("Save");
-    saveBtn.addClass("col-xs-2 col-sm-2 col-md-2 col-lg-2 btn btn-primary saveBtn");
-    saveBtn.attr("type", "submit");
-    saveBtn.attr("data-name", i);
-    nextRow.append(saveBtn);  
+    nextRow.append(`<button class="col-xs-2 col-sm-2 col-md-2 col-lg-2 btn btn-primary saveBtn" type='submit'
+    data-name=${i}><i class="fas fa-save"></i></button>`);  
 }
 
 //Click button to save event
@@ -64,25 +64,3 @@ $(".input").on("keyup", function() {
 //Display today's date
 var currentDate = moment().format("dddd, MMMM Do");
 $("#currentDay").text(currentDate);
-
-//Determine past, present, future from current time
-//set classes for each
-var currentTime = moment().format("hh a");
-currentTime.toUpperCase().replace(" ", "");
-for (i=0; i<myDay.length; i++) {
-    //Current hour = red
-    if (myDay[i].time == currentTime) {
-        var red = $(myDay[i].time).children[1];
-        red.addClass("present");
-    }
-    //Past hours = gray
-    else if (){
-        var gray = $(myDay[i].time).children[1];
-        gray.addClass("past");
-    }
-    //Future hours = green
-    else {
-        var green = $(myDay[i].time).children[1];
-        green.addClass("future");
-    }
-}
