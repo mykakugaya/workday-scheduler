@@ -41,6 +41,7 @@ body {
     color: #000000;
     border-top: 1px dashed #000000;
     text-align: right;
+    padding-top: 10px;
   }
   
   .past {
@@ -70,8 +71,7 @@ body {
     font-size: 20px;
     transition: all .3s ease-in-out;
   }
-  
-  /* .input {
-      margin-right: 5px;
 
-  } */
+  .input {
+      /* align text at top */
+  }

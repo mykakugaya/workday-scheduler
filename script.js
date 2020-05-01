@@ -61,5 +61,28 @@ $(".input").on("keyup", function() {
     });
 })
 
+//Display today's date
+var currentDate = moment().format("dddd, MMMM Do");
+$("#currentDay").text(currentDate);
+
 //Determine past, present, future from current time
 //set classes for each
+var currentTime = moment().format("hh a");
+currentTime.toUpperCase().replace(" ", "");
+for (i=0; i<myDay.length; i++) {
+    //Current hour = red
+    if (myDay[i].time == currentTime) {
+        var red = $(myDay[i].time).children[1];
+        red.addClass("present");
+    }
+    //Past hours = gray
+    else if (){
+        var gray = $(myDay[i].time).children[1];
+        gray.addClass("past");
+    }
+    //Future hours = green
+    else {
+        var green = $(myDay[i].time).children[1];
+        green.addClass("future");
+    }
+}
