@@ -51,7 +51,7 @@ for(let i = 0; i < myDay.length; i++) {
 }
 
 //Click button to save event
-$(".input").on("keyup", function() {
+$(".description").on("keyup", function() {
     var inputText = this.value;
     $(".saveBtn").on("click", function(){
         event.preventDefault();
