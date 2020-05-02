@@ -62,6 +62,7 @@ body {
     border-bottom-right-radius: 15px;
     background-color: #06AED5;
     color: white;
+    max-width: 30%;
   }
   
   .saveBtn i:hover {
@@ -92,5 +93,6 @@ body {
 
       .saveBtn {
           width: 90%;
+          max-width: none;
       }
   }
